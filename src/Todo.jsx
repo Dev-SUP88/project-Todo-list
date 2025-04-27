@@ -1,4 +1,22 @@
+import { useState } from "react"
+
 const Todo = () => {
+
+  const [todos, setTodos] = useState([]);
+  const [inputTodo, setInputTodo] = useState('');
+  const [insuccess, setIssuccess] = useState(false);
+
+  const handleinput = (e) => {
+    setInputTodo(e.target.value);
+  }
+
+  const handleSumit = (e) => {
+    e.prevendefault();
+
+    setTodos([...todos, inputTodo]);
+  }
+  
+
   return (
     <div className="container p-5">
         <main className="d-flex justify-content-center">
@@ -16,7 +34,11 @@ const Todo = () => {
           <ul className="d-flex">
             {
               todos.map((todo) => (
-                <li className="btn" key={todo.id}></li>
+                <li className="btn" key={todo.id} >
+                  {todo.title}
+                  <input className="btn btn-success" type='checkbox' checked={issuccess} />
+                  <button className="btn btn-danger">ลบ</button>
+                  </li>
               ))
             }
           </ul>
