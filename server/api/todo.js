@@ -1,15 +1,10 @@
-import express from "express";
-import cors from 'cors';
+import express from 'express';
 import db from '../config.js';
-const app = express();
-const PORT = 3000;
 
 
-app.use(cors());
-app.use(express.json());
+const router = express.Router();
 
-
-app.get('/todo', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const [row] = await db.promise().query('SELECT id_todo, title, is_done FROM tb_todo');
         console.log(row);
@@ -20,7 +15,7 @@ app.get('/todo', async (req, res) => {
     }
 });
 
-app.post('/todo', async (req, res) => {
+router.post('/', async (req, res) => {
     const { title } = req.body;
     try {
         const [result] = await db.promise().query('INSERT INTO tb_todo(title, is_done) VALUES (?, ?)', [title, false]);
@@ -32,7 +27,7 @@ app.post('/todo', async (req, res) => {
     }
 });
 
-app.put('/todo/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
     const id = req.params.id;
     const { is_done } = req.body;
 
@@ -50,7 +45,7 @@ app.put('/todo/:id', async (req, res) => {
     }
 });
 
-app.delete('/todo/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     const id = req.params.id;
 
     try{
@@ -67,6 +62,4 @@ app.delete('/todo/:id', async (req, res) => {
     }
 });
 
-
-
-app.listen(PORT, () => console.log(`http://127.0.0.1:${PORT}`));
+export default router;

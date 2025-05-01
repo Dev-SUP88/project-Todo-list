@@ -15,7 +15,7 @@ const Todo = () => {
     e.preventDefault();
 
     try{
-      const res = await axios.post('http://127.0.0.1:3000/todo', { title: inputTodo });
+      const res = await axios.post('http://127.0.0.1:3000/todo/', { title: inputTodo });
       console.log('added: ', res.data);
 
       fetchTodos();

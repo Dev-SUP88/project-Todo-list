@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 29, 2025 at 09:18 AM
+-- Generation Time: May 01, 2025 at 10:08 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.3.1
 
@@ -30,9 +30,15 @@ SET time_zone = "+00:00";
 CREATE TABLE `tb_todo` (
   `id_todo` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
-  `is_done` tinyint(1) NOT NULL,
-  `user_id` int(100) NOT NULL
+  `is_done` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_todo`
+--
+
+INSERT INTO `tb_todo` (`id_todo`, `title`, `is_done`) VALUES
+(1, 'eeeesdfsdf', 0);
 
 -- --------------------------------------------------------
 
@@ -54,8 +60,7 @@ CREATE TABLE `tb_user` (
 -- Indexes for table `tb_todo`
 --
 ALTER TABLE `tb_todo`
-  ADD PRIMARY KEY (`id_todo`),
-  ADD KEY `tb_todo_ibfk_1` (`user_id`);
+  ADD PRIMARY KEY (`id_todo`);
 
 --
 -- Indexes for table `tb_user`
@@ -71,23 +76,13 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT for table `tb_todo`
 --
 ALTER TABLE `tb_todo`
-  MODIFY `id_todo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_todo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `tb_todo`
---
-ALTER TABLE `tb_todo`
-  ADD CONSTRAINT `tb_todo_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tb_user` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
